@@ -1,0 +1,70 @@
+<div class="container my-app-theme">
+  <h3 mat-dialog-title>{{data == null ? 'Create new Person' : 'Update Person'}}</h3>
+
+  <form [formGroup]="personDetailsForm" (ngSubmit)="onSubmit(personDetailsForm.value)">
+
+    <div class="form">
+      <mat-form-field color="accent">
+        <input matInput #input class="form-control" placeholder="First Name" formControlName="firstName" required>
+        <mat-error *ngFor="let validation of validationMessages.firstName">
+          <mat-error class="error-message" *ngIf="personDetailsForm.get('firstName').hasError(validation.type) || (personDetailsForm.get('firstName').dirty || personDetailsForm.get('firstName').touched)">{{validation.message}}</mat-error>
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="form">
+      <mat-form-field color="accent">
+        <input matInput #input class="form-control" placeholder="Last Name" formControlName="lastName" required>
+        <mat-error *ngFor="let validation of validationMessages.lastName">
+          <mat-error class="error-message" *ngIf="personDetailsForm.get('lastName').hasError(validation.type) && (personDetailsForm.get('lastName').dirty || personDetailsForm.get('lastName').touched)">{{validation.message}}</mat-error>
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="form">
+      <mat-form-field color="accent">
+        <input matInput #inputstate class="form-control" placeholder="Personal Number" formControlName="personalNumber"
+          minlength="11" maxlength="11">
+        <mat-error *ngFor="let validation of validationMessages.personalNumber">
+          <mat-error class="error-message" *ngIf="personDetailsForm.get('personalNumber').hasError(validation.type) && (personDetailsForm.get('personalNumber').dirty || personDetailsForm.get('personalNumber').touched)">{{validation.message}}</mat-error>
+        </mat-error>
+        <mat-hint align="end">{{inputstate.value?.length || 0}}/11</mat-hint>
+      </mat-form-field>
+    </div>
+
+    <div class="form">
+      <mat-form-field color="accent">
+        <input matInput [matDatepicker]="picker" placeholder="Birthdate" formControlName="birthdate">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+        <mat-error *ngFor="let validation of validationMessages.birthdate">
+          <mat-error class="error-message" *ngIf="personDetailsForm.get('birthdate').hasError(validation.type) && (personDetailsForm.get('birthdate').dirty || personDetailsForm.get('birthdate').touched)">{{validation.message}}</mat-error>
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="form">
+      <mat-form-field color="accent">
+        <mat-select placeholder="Gender" formControlName="gender">
+          <mat-option *ngFor="let gender of genders" [value]="gender.id">
+            {{ gender.name }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <div class="form">
+      <mat-form-field color="accent">
+        <input matInput placeholder="Salary" formControlName="salary">
+        <mat-error *ngFor="let validation of validationMessages.salary">
+          <mat-error class="error-message" *ngIf="personDetailsForm.get('salary').hasError(validation.type) && (personDetailsForm.get('salary').dirty || personDetailsForm.get('salary').touched)">{{validation.message}}</mat-error>
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <div mat-dialog-actions>
+      <button mat-button type="submit" color="primary" [disabled]="!personDetailsForm.valid">Save</button>
+      <button mat-button type="button" color="basic" (click)="onCancelClick()">Cancel</button>
+    </div>
+  </form>
+</div>

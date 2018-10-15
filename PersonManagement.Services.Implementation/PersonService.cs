@@ -109,11 +109,21 @@ namespace PersonManagement.Services.Implementation
             return response;
         }
 
-        public BaseResponseDataModel<bool> IsPersonalNumberUnique(string personalNumber)
+        public BaseResponseDataModel<bool> IsPersonalNumberUnique(string personalNumber, int? personId)
         {
             var response = ProcessRequest(() =>
             {
-                var dbPerson = _applicationDbContext.Persons.FirstOrDefault(per => per.PersonalNumber == personalNumber);
+                if(string.IsNullOrEmpty(personalNumber))
+                    return new BaseResponseDataModel<bool>(true, true);
+
+                if (personId.HasValue)
+                {
+                    var dbPersonById = _applicationDbContext.Persons.AsNoTracking().FirstOrDefault(per => per.Id == personId.Value && per.PersonalNumber == personalNumber);
+                    if(dbPersonById != null)
+                        return new BaseResponseDataModel<bool>(true, true);
+                }
+
+                var dbPerson = _applicationDbContext.Persons.AsNoTracking().FirstOrDefault(per => per.PersonalNumber == personalNumber);
 
                 if (dbPerson == null)
                     return new BaseResponseDataModel<bool>(true, true);

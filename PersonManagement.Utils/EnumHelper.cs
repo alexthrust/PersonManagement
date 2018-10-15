@@ -8,8 +8,15 @@ namespace PersonManagement.Utils
         {
             if (gender == null) return string.Empty;
 
-            var genderName = (EGender)gender == EGender.Male ? EGender.Male.ToString() : EGender.Female.ToString();
-            return genderName;
+            switch ((EGender)gender)
+            {
+                case EGender.Male:
+                    return EGender.Male.ToString();
+                case EGender.Female:
+                        return EGender.Female.ToString();
+            }
+
+            return string.Empty;
         }
     }
 }

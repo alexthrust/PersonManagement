@@ -75,5 +75,16 @@ namespace PersonManagement.Api.Controllers
 
             return StatusCode(500, result.ErrorMessage);
         }
+
+        // GET api/person/unique?personalNumber=123456789563
+        [HttpGet("unique")]
+        public IActionResult CheckIsPersonalNumberUnique([FromQuery] string personalNumber, [FromQuery] int? personId)
+        {
+            var result = _personService.IsPersonalNumberUnique(personalNumber, personId);
+            if (result.IsSuccess)
+                return new OkObjectResult(result.Data);
+
+            return StatusCode(500, result.ErrorMessage);
+        }
     }
 }

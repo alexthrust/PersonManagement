@@ -16,19 +16,28 @@ import {
     MatToolbarModule,
     MatFormFieldModule,
     MatInputModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatDialogModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatSelectModule,
+    MatSnackBarModule,
 } from '@angular/material';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { AboutComponent } from './about/about.component';
 import { PersonsService } from './services/persons.service';
+import { CreateDialogComponent } from './dialogs/create.dialog/create.dialog.component';
+import { DeleteDialogComponent } from './dialogs/delete.dialog/delete.dialog.component';
 
 @NgModule({
     declarations: [
         AppComponent,
         HomeComponent,
-        AboutComponent
+        AboutComponent,
+        CreateDialogComponent,
+        DeleteDialogComponent
     ],
     imports: [
         AppRoutingModule,
@@ -47,9 +56,18 @@ import { PersonsService } from './services/persons.service';
         MatFormFieldModule,
         MatInputModule,
         MatProgressSpinnerModule,
+        MatDialogModule,
+        MatDatepickerModule,
+        MatNativeDateModule,
+        MatSelectModule,
+        MatSnackBarModule,
         FormsModule,
         ReactiveFormsModule
 
+    ],
+    entryComponents: [
+        CreateDialogComponent,
+        DeleteDialogComponent
     ],
     providers: [
         PersonsService

@@ -1,0 +1,18 @@
+<div class="container">
+  <h3 mat-dialog-title>Are you sure?</h3>
+  <div mat-dialog-content>
+    First Name: {{data.firstName}}
+    <p></p>
+    Last Name: {{data.lastName}}
+    <p></p>
+    Personal number: {{data.personalNumber}}
+    <p></p>
+    Birthdate: {{data.birthdate | date: 'MM/dd/yyyy'}}
+    <p></p>
+  </div>
+
+  <div mat-dialog-actions>
+    <button mat-button color="warn" [mat-dialog-close]="1" (click)="onDeleteClick()">Delete</button>
+    <button mat-button color="basic" (click)="onCancelClick()">Cancel</button>
+  </div>
+</div>

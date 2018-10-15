@@ -14,6 +14,6 @@ namespace PersonManagement.Services.Abstraction
         Task<BaseResponseModel> UpdatePerson(int personId, PersonModel person);
         Task<BaseResponseModel> DeletePerson(int personId);
 
-        BaseResponseDataModel<bool> IsPersonalNumberUnique(string personalNumber);
+        BaseResponseDataModel<bool> IsPersonalNumberUnique(string personalNumber, int? personId);
     }
 }

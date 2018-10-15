@@ -1,5 +1,5 @@
 <div class="m-4">
-  <h1 class="mat-h1">{{title}}</h1>
+  <h1>{{title}}</h1>
 </div>
 
 <div class="container mat-elevation-z8 m-4 p-1">
@@ -16,12 +16,12 @@
 
     <ng-container matColumnDef="id">
       <mat-header-cell *matHeaderCellDef mat-sort-header>Id</mat-header-cell>
-      <mat-cell *matCellDef="let row">{{row.id}}</mat-cell>
+      <mat-cell *matCellDef="let row" color="primary">{{row.id}}</mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="firstName">
       <mat-header-cell *matHeaderCellDef mat-sort-header>First Name</mat-header-cell>
-      <mat-cell *matCellDef="let row"> {{row.firstName}}</mat-cell>
+      <mat-cell *matCellDef="let row" color="primary"> {{row.firstName}}</mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="lastName">
@@ -39,7 +39,7 @@
       <mat-cell *matCellDef="let row"> {{row.birthdate | date: 'MM/dd/yyyy'}}</mat-cell>
     </ng-container>
 
-    <ng-container matColumnDef="genderName">
+    <ng-container matColumnDef="gender">
       <mat-header-cell *matHeaderCellDef mat-sort-header>Gender</mat-header-cell>
       <mat-cell *matCellDef="let row"> {{row.genderName}}</mat-cell>
     </ng-container>
@@ -49,23 +49,23 @@
       <mat-cell *matCellDef="let row"> {{row.salary}}</mat-cell>
     </ng-container>
 
-    <!-- <ng-container matColumnDef="actions">
+    <ng-container matColumnDef="actions">
       <mat-header-cell *matHeaderCellDef>
-        <button mat-icon-button color="primary" (click)="addNew()">
+        <button mat-icon-button color="primary" (click)="createPerson()">
           <mat-icon aria-label="Example icon-button with a heart icon">add</mat-icon>
         </button>
       </mat-header-cell>
 
       <mat-cell *matCellDef="let row; let i=index;">
-        <button mat-icon-button color="accent" (click)="startEdit(i, row.id, row.title, row.state, row.url, row.created_at, row.updated_at)">
+        <button mat-icon-button color="accent" (click)="updatePerson(i, row)">
           <mat-icon aria-label="Edit">edit</mat-icon>
         </button>
 
-        <button mat-icon-button color="accent" (click)="deleteItem(i, row.id, row.title, row.state, row.url)">
+        <button mat-icon-button color="accent" (click)="deletePerson(i, row)">
           <mat-icon aria-label="Delete">delete</mat-icon>
         </button>
       </mat-cell>
-    </ng-container> -->
+    </ng-container>
 
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
     <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
