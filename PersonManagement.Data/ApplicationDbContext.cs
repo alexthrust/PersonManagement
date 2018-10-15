@@ -18,9 +18,9 @@ namespace PersonManagement.Data
                 entity.ToTable("Person.Persons");
 
                 entity.Property(e => e.Id).HasColumnName("Id");
-                entity.Property(e => e.FirstName).HasColumnName("FirstName");
-                entity.Property(e => e.LastName).HasColumnName("LastName");
-                entity.Property(e => e.PersonalNumber).HasColumnName("PersonalNumber");
+                entity.Property(e => e.FirstName).HasColumnName("FirstName").HasColumnType("TEXT COLLATE NOCASE"); 
+                entity.Property(e => e.LastName).HasColumnName("LastName").HasColumnType("TEXT COLLATE NOCASE");
+                entity.Property(e => e.PersonalNumber).HasColumnName("PersonalNumber").HasColumnType("TEXT COLLATE NOCASE");
                 entity.Property(e => e.Birthdate).HasColumnName("Birthdate");
                 entity.Property(e => e.Gender).HasColumnName("Gender");
                 entity.Property(e => e.Salary).HasColumnName("Salary");

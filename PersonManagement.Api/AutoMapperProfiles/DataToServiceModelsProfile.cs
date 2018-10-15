@@ -11,9 +11,11 @@ namespace PersonManagement.Api.AutoMapperProfiles
     {
         public DataToServiceModelsProfile()
         {
+            var enumHelper = new EnumHelper();
+
             CreateMap<Person, PersonModel>()
                 .ForMember(dest => dest.Gender, opt => opt.MapFrom(src => src.Gender.HasValue ? (EGender)src.Gender : EGender.None))
-                .ForMember(dest => dest.GenderName, opt => opt.MapFrom(src => EnumHelper.GetPersonGenderName(src.Gender)));
+                .ForMember(dest => dest.GenderName, opt => opt.MapFrom(src => enumHelper.GetPersonGenderName(src.Gender)));
         }
     }
 }

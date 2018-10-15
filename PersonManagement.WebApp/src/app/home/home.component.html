@@ -2,9 +2,9 @@
   <h1 class="mat-h1">{{title}}</h1>
 </div>
 
-<div class="container mat-elevation-z8 m-4 p-2">
+<div class="container mat-elevation-z8 m-4 p-1">
 
-  <mat-form-field floatPlaceholder="never" color="accent">
+  <mat-form-field floatPlaceholder="never" color="accent" class="p-3">
     <input matInput #filter placeholder="Search persons">
   </mat-form-field>
 
@@ -36,7 +36,7 @@
 
     <ng-container matColumnDef="birthdate">
       <mat-header-cell *matHeaderCellDef mat-sort-header>Birthdate</mat-header-cell>
-      <mat-cell *matCellDef="let row"> {{row.birthdate}}</mat-cell>
+      <mat-cell *matCellDef="let row"> {{row.birthdate | date: 'MM/dd/yyyy'}}</mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="genderName">
@@ -72,7 +72,7 @@
   </mat-table>
 
 
-  <div class="no-results" [style.display]="1 == 0 ? '' : 'none'">
+  <div class="no-results" [style.display]="dataSource.totalItems == 0 ? '' : 'none'">
     No results
   </div>
 

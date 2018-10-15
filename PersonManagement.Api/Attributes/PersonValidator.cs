@@ -18,9 +18,11 @@ namespace PersonManagement.Api.Attributes
             RuleFor(m => m.LastName).NotEmpty();
 
             RuleFor(m => m.PersonalNumber).Length(11);
-            RuleFor(m => m.PersonalNumber).SetValidator(new RegularExpressionValidator("0-9"));
+            RuleFor(m => m.PersonalNumber).SetValidator(new RegularExpressionValidator("[0-9]"));
             RuleFor(m => m.PersonalNumber).Custom((list, context) =>
             {
+                if (context.PropertyValue == null) return;
+
                 var result = _personService.IsPersonalNumberUnique(context.PropertyValue.ToString());
 
                 if(!result.Data)

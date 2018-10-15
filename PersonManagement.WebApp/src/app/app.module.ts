@@ -32,7 +32,7 @@ import { PersonsService } from './services/persons.service';
     ],
     imports: [
         AppRoutingModule,
-        HttpClientModule
+        HttpClientModule,
         BrowserModule,
         BrowserAnimationsModule,
         MatButtonModule,

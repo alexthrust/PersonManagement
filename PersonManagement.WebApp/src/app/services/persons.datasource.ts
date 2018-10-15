@@ -19,13 +19,14 @@ export class PersonsDataSource implements DataSource<Person> {
     }
 
     loadPersons(filter: string,
-        sortDirection: string,
+        sortField: string,
+        sortDesc: string,
         pageIndex: number,
         pageSize: number) {
 
         this.loadingSubject.next(true);
 
-        this.personsService.getAllPersons(filter, sortDirection, pageIndex, pageSize)
+        this.personsService.getAllPersons(filter, sortField, sortDesc, pageIndex, pageSize)
             .pipe(
                 catchError(() => of([])),
                 finalize(() => this.loadingSubject.next(false)),

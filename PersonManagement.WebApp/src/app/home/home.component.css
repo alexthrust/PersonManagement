@@ -8,5 +8,15 @@ table {
 }
 
 .mat-form-field {
+  /* width: 100%; */
+}
+
+.spinner-container {
+  height: 100%;
   width: 100%;
+  position: fixed;
+}
+
+.spinner-container mat-spinner {
+  margin: 80px auto 0 auto;
 }

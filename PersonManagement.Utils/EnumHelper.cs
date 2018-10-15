@@ -4,7 +4,7 @@ namespace PersonManagement.Utils
 {
     public class EnumHelper
     {
-        public static string GetPersonGenderName(object gender)
+        public string GetPersonGenderName(object gender)
         {
             if (gender == null) return string.Empty;
 

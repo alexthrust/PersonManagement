@@ -134,8 +134,8 @@ namespace PersonManagement.Services.Implementation
                 var filterProperties = typeof(Person).GetProperties().Where(property => !property.Name.Equals("Id"));
                 var genderFilterProperties = typeof(Person).GetProperties().Where(property => property.Name.Equals("Gender"));
 
-                dbPersons = dbPersons.Where(person => filterProperties.Any(prop => (prop.GetValue(person, null) == null ? string.Empty : prop.GetValue(person, null).ToString().ToLower()).Contains(request.FilterValue.ToLower())) ||
-                                                      genderFilterProperties.Any(prop => EnumHelper.GetPersonGenderName(prop.GetValue(person, null)).ToLower().Equals(request.FilterValue.ToLower())));
+                dbPersons = dbPersons.Where(person => filterProperties.Any(prop => (GetFormattedStringFromObject(prop.GetValue(person, null)).ToLowerInvariant()).Contains(request.FilterValue.ToLowerInvariant())) ||
+                                                      genderFilterProperties.Any(prop => GetFormattedStringFromObject(prop.GetValue(person, null)).ToLowerInvariant().Contains(request.FilterValue.ToLowerInvariant())));
             }
 
             if (request.Sort != null)
@@ -150,6 +150,21 @@ namespace PersonManagement.Services.Implementation
             return dbPersons;
         }
 
-        
+        private string GetFormattedStringFromObject(object value)
+        {
+            if (value == null)
+                return string.Empty;
+
+            if (value is Enum)
+            {
+                var enumHelper = new EnumHelper();
+                return enumHelper.GetPersonGenderName(value);
+            }
+
+            if (value is DateTime dateTime)
+                return dateTime.ToString("MM/dd/yyyy");
+
+            return value.ToString();
+        }
     }
 }

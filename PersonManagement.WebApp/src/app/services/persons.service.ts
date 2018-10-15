@@ -20,13 +20,22 @@ export class PersonsService {
         return this.dialogData;
     }
 
-    getAllPersons(filter = '', sortOrder = 'asc', pageNumber = 0, pageSize = 5): Observable<CustomStoreDataModel<Person>> {
+    getAllPersons(filter, sortField, sortDesc, pageNumber = 0, pageSize = 5): Observable<CustomStoreDataModel<Person>> {
+        let params = new HttpParams()
+            .set('filterValue', filter)
+            .set('skip', (pageNumber * pageSize).toString())
+            .set('take', pageSize.toString());
+
+        if (sortDesc != null && sortDesc !== '') {
+            params = params.append('sort.Desc', (sortDesc === 'desc').toString());
+        }
+
+        if (sortField != null) {
+            params = params.append('sort.Field', sortField);
+        }
+
         return this.httpClient.get(`${environment.apiUrl}/person/records`, {
-            params: new HttpParams()
-                .set('filterValue', filter)
-                .set('sortOrder', sortOrder)
-                .set('skip', pageNumber.toString())
-                .set('take', pageSize.toString())
+            params: params
         }).pipe(
             map((response: CustomStoreDataModel<Person>) => response)
         );

@@ -22,7 +22,7 @@ namespace PersonManagement.Extensions
 
         private static IOrderedQueryable<T> ApplyOrder<T>(IQueryable<T> source, string property, string methodName)
         {
-            string[] props = property.Split('_');
+            string[] props = property.ToUpperCaseFirstLetter().Split('_');
             Type type = typeof(T);
             ParameterExpression arg = Expression.Parameter(type, "x");
             Expression expr = arg;
