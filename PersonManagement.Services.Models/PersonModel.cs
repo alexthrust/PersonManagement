@@ -12,6 +12,7 @@ namespace PersonManagement.Services.Models
         public string PersonalNumber { get; set; }
         public DateTime? Birthdate { get; set; }
         public EGender? Gender { get; set; }
+        public string GenderName { get; set; }
         public decimal? Salary { get; set; }
   }
 }

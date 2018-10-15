@@ -12,6 +12,7 @@ using PersonManagement.Extensions;
 using PersonManagement.Services.Abstraction;
 using PersonManagement.Services.Models;
 using PersonManagement.Services.Models.Common;
+using PersonManagement.Utils;
 
 namespace PersonManagement.Services.Implementation
 {
@@ -134,7 +135,7 @@ namespace PersonManagement.Services.Implementation
                 var genderFilterProperties = typeof(Person).GetProperties().Where(property => property.Name.Equals("Gender"));
 
                 dbPersons = dbPersons.Where(person => filterProperties.Any(prop => (prop.GetValue(person, null) == null ? string.Empty : prop.GetValue(person, null).ToString().ToLower()).Contains(request.FilterValue.ToLower())) ||
-                                                      genderFilterProperties.Any(prop => GetPersonGenderName(prop.GetValue(person, null)).ToLower().Equals(request.FilterValue.ToLower())));
+                                                      genderFilterProperties.Any(prop => EnumHelper.GetPersonGenderName(prop.GetValue(person, null)).ToLower().Equals(request.FilterValue.ToLower())));
             }
 
             if (request.Sort != null)
@@ -149,12 +150,6 @@ namespace PersonManagement.Services.Implementation
             return dbPersons;
         }
 
-        private string GetPersonGenderName(object gender)
-        {
-            if (gender == null) return string.Empty;
-
-            var genderName = (EGender)gender == EGender.Male ? EGender.Male.ToString() : EGender.Female.ToString();
-            return genderName;
-        }
+        
     }
 }

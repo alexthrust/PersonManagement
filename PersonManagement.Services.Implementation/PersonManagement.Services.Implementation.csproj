@@ -12,6 +12,7 @@
     <ProjectReference Include="..\PersonManagement.Constants\PersonManagement.Constants.csproj" />
     <ProjectReference Include="..\PersonManagement.Data\PersonManagement.Data.csproj" />
     <ProjectReference Include="..\PersonManagement.Services.Abstraction\PersonManagement.Services.Abstraction.csproj" />
+    <ProjectReference Include="..\PersonManagement.Utils\PersonManagement.Utils.csproj" />
   </ItemGroup>
 
   <ItemGroup>
